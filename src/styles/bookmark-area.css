@@ -1,0 +1,85 @@
+/* Bookmark Area Styles */
+.bookmark-area {
+  @apply relative w-full h-full;
+}
+
+.bookmark-block {
+  @apply bg-slate-800/50 rounded-xl p-4 transition-all duration-200;
+}
+
+.bookmark-block:hover {
+  @apply bg-slate-800/70;
+}
+
+.bookmark-block.dragging {
+  @apply opacity-50 scale-95;
+}
+
+.bookmark-block.drag-over {
+  @apply ring-2 ring-blue-500/50;
+}
+
+.bookmark-item {
+  @apply flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors duration-150;
+}
+
+.bookmark-item:hover {
+  @apply bg-slate-700/50;
+}
+
+.bookmark-item.is-open {
+  @apply bg-blue-500/10 border-l-2 border-blue-500;
+}
+
+.bookmark-item .close-btn {
+  @apply opacity-0 group-hover:opacity-100 transition-opacity duration-150;
+}
+
+.context-menu {
+  @apply fixed z-50 min-w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-xl py-1;
+}
+
+.context-menu-item {
+  @apply px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 cursor-pointer;
+}
+
+.quick-edit-card {
+  @apply fixed z-50 bg-slate-800 border border-slate-700 rounded-xl shadow-xl p-4 w-80;
+}
+
+.quick-config-card {
+  @apply fixed z-50 bg-slate-800 border border-slate-700 rounded-xl shadow-xl p-4 w-72;
+}
+
+.workspace-tab {
+  @apply px-4 py-2 text-sm rounded-t-lg cursor-pointer transition-colors duration-150;
+}
+
+.workspace-tab.active {
+  @apply bg-slate-800/50 text-white;
+}
+
+.workspace-tab:not(.active) {
+  @apply text-slate-400 hover:text-slate-300;
+}
+
+.search-box {
+  @apply flex items-center gap-2 bg-slate-800/50 rounded-lg px-3 py-2;
+}
+
+.search-box input {
+  @apply bg-transparent text-white placeholder-slate-500 outline-none flex-1;
+}
+
+.search-box mark,
+.bookmark-area mark {
+  @apply bg-yellow-500/30 text-yellow-200 rounded-sm px-0.5;
+}
+
+.search-dropdown {
+  @apply absolute top-full left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded-lg shadow-xl z-50 max-h-64 overflow-y-auto;
+}
+
+.search-dropdown-item {
+  @apply w-full text-left px-3 py-2 text-sm text-slate-300 hover:bg-slate-700/50 flex items-center gap-2;
+}
