@@ -1,0 +1,46 @@
+schema: spec-driven
+
+context: |
+  项目: JustNewTab - 多浏览器新标签页扩展
+  协议: Apache License 2.0
+
+  技术栈:
+  - 前端框架: Svelte + TypeScript
+  - CSS: Tailwind CSS (实用优先)
+  - 打包工具: Vite
+  - 跨浏览器兼容: webextension-polyfill (统一 chrome/browser API)
+  - 扩展规范: Manifest V3 (Chrome/Edge), Manifest V2/V3 (Firefox)
+
+  目标浏览器: Chrome, Edge, Firefox
+
+  核心功能:
+  - 新标签页替换: 替换浏览器默认新标签页
+  - 书签管理器: 展示和管理浏览器书签
+  - 便签/TODO: 快速记录待办事项和便签
+
+  编码规范:
+  - 不可变性: 始终创建新对象，不修改原对象
+  - 文件组织: 多个小文件优于少量大文件（200-400行，最多800行）
+  - 错误处理: 全面处理错误，提供用户友好的错误信息
+  - 输入验证: 使用 zod 进行数据验证
+  - 代码质量: 无 console.log、无硬编码值、无深层嵌套（>4层）
+  - 命名: 语义化命名，函数简短（<50行）
+
+  提交规范: Conventional Commits（feat/fix/refactor/docs/test/chore）
+
+rules:
+  proposal:
+    - 使用中文编写所有文档
+    - 包含"非目标"章节，明确边界
+    - 考虑多浏览器兼容性影响
+    - 评估对扩展体积的影响
+  design:
+    - 使用中文编写
+    - 遵循 Svelte 组件化设计
+    - 考虑 Manifest V2/V3 双版本兼容方案
+    - 标注浏览器 API 差异处理策略
+  tasks:
+    - 使用中文编写
+    - 每个任务控制在 2 小时以内
+    - 标注涉及的浏览器兼容性工作
+    - 包含测试验证步骤
