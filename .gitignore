@@ -58,3 +58,6 @@ secrets/
 # Browser extension specific
 .web-extension-id
 web-ext-artifacts/
+
+# Claude Code
+.claude/
