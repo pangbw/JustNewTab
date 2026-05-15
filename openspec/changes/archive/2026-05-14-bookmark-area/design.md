@@ -49,12 +49,14 @@ JustNewTab 是一个多浏览器新标签页扩展，需要实现一个功能完
 **决策**: 采用组合式组件架构，将功能拆分为多个小组件
 
 **理由**:
+
 - 符合 Svelte 组件化最佳实践
 - 便于代码维护和测试
 - 提高组件复用性
 - 符合项目编码规范（200-400行，最多800行）
 
 **组件结构**:
+
 ```
 BookmarkArea/
 ├── BookmarkArea.svelte          # 主容器组件
@@ -74,6 +76,7 @@ BookmarkArea/
 ```
 
 **替代方案**: 单一大组件
+
 - **缺点**: 代码难以维护，不符合项目规范
 
 ### 2. 状态管理方案
@@ -81,12 +84,14 @@ BookmarkArea/
 **决策**: 使用 Svelte 的 writable store 进行状态管理
 
 **理由**:
+
 - Svelte 原生支持，无需额外依赖
 - 简单易用，适合中小型应用
 - 响应式更新，性能良好
 - 符合不可变数据操作规范
 
 **数据结构**:
+
 ```typescript
 interface BookmarkBlock {
   id: string;
@@ -107,14 +112,15 @@ interface Bookmark {
   id: string;
   title: string;
   url: string;
-  description?: string;  // 书签描述
+  description?: string; // 书签描述
   favicon?: string;
-  isOpen?: boolean;      // 是否已打开
+  isOpen?: boolean; // 是否已打开
   displayTitle?: string; // 自定义显示标题
 }
 ```
 
 **替代方案**: 使用更复杂的状态管理库（如 Redux）
+
 - **缺点**: 增加依赖，复杂度高，不适合当前项目规模
 
 ### 3. 拖拽实现方案
@@ -122,18 +128,21 @@ interface Bookmark {
 **决策**: 使用 HTML5 Drag and Drop API 原生实现
 
 **理由**:
+
 - 无需额外依赖，减小扩展体积
 - 浏览器原生支持，性能好
 - 兼容性好，支持所有目标浏览器
 - 符合项目最小依赖原则
 
 **实现策略**:
+
 - 使用 `draggable` 属性标记可拖拽元素
 - 实现 `dragstart`、`dragover`、`drop` 事件处理
 - 使用 CSS transform 实现平滑拖拽效果
 - 保存拖拽后的位置到 store
 
 **替代方案**: 使用 svelte-dnd-action 库
+
 - **缺点**: 增加依赖，可能影响扩展体积
 
 ### 4. 右键菜单实现
@@ -141,18 +150,21 @@ interface Bookmark {
 **决策**: 自定义右键菜单组件，拦截浏览器默认右键菜单
 
 **理由**:
+
 - 可以完全自定义菜单样式和功能
 - 避免浏览器默认菜单的干扰
 - 支持动态菜单项
 - 用户体验更好
 
 **实现策略**:
+
 - 监听 `contextmenu` 事件
 - 阻止默认行为 `e.preventDefault()`
 - 根据点击位置显示自定义菜单
 - 支持点击空白处关闭菜单
 
 **替代方案**: 使用浏览器原生 context menu API
+
 - **缺点**: 样式受限，功能有限
 
 ### 5. 书签数据获取
@@ -160,14 +172,16 @@ interface Bookmark {
 **决策**: 使用 webextension-polyfill 的 bookmarks API
 
 **理由**:
+
 - 统一 Chrome 和 Firefox 的 API 差异
 - 官方推荐的方式
 - 类型安全（TypeScript 支持）
 - 符合项目多浏览器兼容策略
 
 **API 使用**:
+
 ```typescript
-import browser from 'webextension-polyfill';
+import browser from "webextension-polyfill";
 
 // 获取书签树
 const bookmarkTree = await browser.bookmarks.getTree();
@@ -177,12 +191,13 @@ const results = await browser.bookmarks.search(query);
 
 // 创建书签
 const newBookmark = await browser.bookmarks.create({
-  title: 'Example',
-  url: 'https://example.com'
+  title: "Example",
+  url: "https://example.com",
 });
 ```
 
 **浏览器差异处理**:
+
 - Chrome: 使用 `chrome.bookmarks` API
 - Firefox: 使用 `browser.bookmarks` API
 - webextension-polyfill 自动处理差异
@@ -192,18 +207,21 @@ const newBookmark = await browser.bookmarks.create({
 **决策**: 使用 Tailwind CSS 实用优先的方式
 
 **理由**:
+
 - 符合项目技术栈要求
 - 开发效率高
 - 样式一致性好
 - 支持响应式设计
 
 **实现策略**:
+
 - 使用 Tailwind 的 utility classes
 - 自定义颜色变量用于书签块颜色
 - 使用 CSS Grid 或 Flexbox 实现布局
 - 响应式断点：sm, md, lg, xl
 
 **替代方案**: 使用 CSS-in-JS 或 scoped CSS
+
 - **缺点**: 增加复杂度，不符合项目技术栈
 
 ### 7. 工作区存储方案
@@ -211,12 +229,14 @@ const newBookmark = await browser.bookmarks.create({
 **决策**: 使用浏览器本地存储 (localStorage) 保存工作区配置
 
 **理由**:
+
 - 无需后端服务
 - 数据持久化
 - 访问速度快
 - 兼容所有目标浏览器
 
 **存储结构**:
+
 ```typescript
 interface WorkspaceConfig {
   workspaces: Workspace[];
@@ -225,12 +245,13 @@ interface WorkspaceConfig {
     defaultBlockColor: string;
     showFavicon: boolean;
     itemsPerRow: number;
-    bookmarkOpenMode: 'current-tab' | 'new-tab' | 'new-window'; // 新增：书签打开方式
+    bookmarkOpenMode: "current-tab" | "new-tab" | "new-window"; // 新增：书签打开方式
   };
 }
 ```
 
 **替代方案**: 使用 IndexedDB
+
 - **缺点**: 复杂度高，对于配置数据来说过于重量级
 
 ### 8. 搜索实现
@@ -238,12 +259,14 @@ interface WorkspaceConfig {
 **决策**: 使用浏览器原生书签搜索 API + 前端过滤
 
 **理由**:
+
 - 浏览器 API 搜索速度快
 - 支持标题和 URL 搜索
 - 无需额外索引
 - 兼容性好
 
 **实现策略**:
+
 - 使用 `browser.bookmarks.search(query)` 进行搜索
 - 前端对结果进行二次过滤和排序
 - 支持实时搜索（防抖处理）
@@ -254,12 +277,14 @@ interface WorkspaceConfig {
 **决策**: 使用悬浮卡片组件实现书签快速编辑
 
 **理由**:
+
 - 用户体验直观，右键即可编辑
 - 避免跳转到新页面编辑
 - 支持实时预览修改效果
 - 符合现代 Web 应用交互模式
 
 **实现策略**:
+
 - 右键书签时显示悬浮卡片
 - 卡片内包含表单：显示内容、URL、描述
 - 使用 zod 进行输入验证
@@ -267,19 +292,21 @@ interface WorkspaceConfig {
 - 点击外部自动保存并关闭
 
 **数据结构扩展**:
+
 ```typescript
 interface Bookmark {
   id: string;
   title: string;
   url: string;
-  description?: string;  // 新增：书签描述
+  description?: string; // 新增：书签描述
   favicon?: string;
-  isOpen?: boolean;      // 新增：是否已打开
+  isOpen?: boolean; // 新增：是否已打开
   displayTitle?: string; // 新增：自定义显示标题
 }
 ```
 
 **替代方案**: 使用模态对话框编辑
+
 - **缺点**: 打断用户操作流程，体验较差
 
 ### 10. 书签打开状态检测
@@ -287,12 +314,14 @@ interface Bookmark {
 **决策**: 使用浏览器 tabs API 检测已打开的书签
 
 **理由**:
+
 - 实时获取浏览器标签页状态
 - 准确匹配书签 URL
 - 支持快速关闭已打开的标签页
 - 跨浏览器兼容性好
 
 **实现策略**:
+
 - 使用 `browser.tabs.query()` 获取所有打开的标签页
 - 定期轮询或监听标签页变化事件
 - 比较标签页 URL 与书签 URL
@@ -300,16 +329,19 @@ interface Bookmark {
 - 显示关闭图标，点击调用 `browser.tabs.remove()` 关闭标签页
 
 **浏览器差异处理**:
+
 - Chrome: 使用 `chrome.tabs` API
 - Firefox: 使用 `browser.tabs` API
 - webextension-polyfill 统一封装
 
 **性能优化**:
+
 - 使用防抖处理标签页变化事件
 - 缓存已打开 URL 集合，避免重复查询
 - 仅在书签区域可见时进行检测
 
 **替代方案**: 使用书签访问历史判断
+
 - **缺点**: 不够准确，无法实时反映当前状态
 
 ### 11. 书签导航行为
@@ -317,12 +349,14 @@ interface Bookmark {
 **决策**: 实现可配置的书签打开方式
 
 **理由**:
+
 - 不同用户有不同的使用习惯
 - 默认在当前页面打开更符合直觉
 - 预留配置项便于后续扩展
 - 支持多种打开方式（当前页、新标签页、新窗口）
 
 **实现策略**:
+
 - 默认行为：左键点击在当前页面打开（`window.location.href = url`）
 - 预留配置：在设置中添加"书签打开方式"选项
 - 配置选项：当前页面、新标签页、新窗口
@@ -330,19 +364,22 @@ interface Bookmark {
 - 支持快捷键修饰：Ctrl+点击在新标签页打开
 
 **数据结构扩展**:
+
 ```typescript
 interface WorkspaceSettings {
   // ... 现有设置
-  bookmarkOpenMode: 'current-tab' | 'new-tab' | 'new-window';
+  bookmarkOpenMode: "current-tab" | "new-tab" | "new-window";
 }
 ```
 
 **用户体验优化**:
+
 - 悬停时显示目标 URL（原生 title 属性）
 - 点击时显示加载状态
 - 支持中键点击（始终在新标签页打开）
 
 **替代方案**: 固定在新标签页打开
+
 - **缺点**: 不符合部分用户习惯，缺乏灵活性
 
 ## Risks / Trade-offs
@@ -354,6 +391,7 @@ interface WorkspaceSettings {
 **影响**: 功能在不同浏览器中表现不一致
 
 **缓解措施**:
+
 - 使用 webextension-polyfill 统一 API
 - 编写浏览器特定的适配器层
 - 充分的跨浏览器测试
@@ -365,6 +403,7 @@ interface WorkspaceSettings {
 **影响**: 用户体验下降，界面卡顿
 
 **缓解措施**:
+
 - 使用 CSS transform 而非 top/left
 - 实现虚拟滚动（如果书签块数量超过 50 个）
 - 优化渲染逻辑，避免不必要的重绘
@@ -376,6 +415,7 @@ interface WorkspaceSettings {
 **影响**: 影响扩展分发和用户体验
 
 **缓解措施**:
+
 - 使用 Tree-shaking 移除未使用代码
 - 压缩图片资源
 - 按需加载非关键功能
@@ -388,6 +428,7 @@ interface WorkspaceSettings {
 **影响**: 大量书签数据可能无法完整保存
 
 **缓解措施**:
+
 - 实现数据压缩
 - 监控存储使用情况
 - 提供数据清理机制
@@ -400,6 +441,7 @@ interface WorkspaceSettings {
 **影响**: 功能无法正常使用
 
 **缓解措施**:
+
 - 在 manifest.json 中声明必要的权限
 - 优雅降级处理权限拒绝情况
 - 提供清晰的用户提示
@@ -411,6 +453,7 @@ interface WorkspaceSettings {
 **影响**: 界面卡顿，CPU 占用过高
 
 **缓解措施**:
+
 - 使用防抖处理标签页变化事件（建议 500ms）
 - 仅在书签区域可见时进行检测
 - 缓存已打开 URL 集合，避免重复查询
@@ -423,6 +466,7 @@ interface WorkspaceSettings {
 **影响**: 用户编辑的书签信息丢失
 
 **缓解措施**:
+
 - 实现自动保存机制（编辑完成后立即保存）
 - 添加编辑历史记录（可选）
 - 提供撤销功能（Ctrl+Z）

@@ -4,12 +4,12 @@
   "version": "0.1.0",
   "description": "一款多浏览器可用的新标签页插件",
   "chrome_url_overrides": {
-    "newtab": "src/newtab/index.html"
+    "newtab": "newtab/index.html"
   },
   "permissions": ["storage", "bookmarks", "tabs"],
   "icons": {
-    "16": "public/icons/icon-16.png",
-    "48": "public/icons/icon-48.png",
-    "128": "public/icons/icon-128.png"
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
   }
 }

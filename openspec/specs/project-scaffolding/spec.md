@@ -1,8 +1,11 @@
 # project-scaffolding Specification
 
 ## Purpose
+
 TBD - created by archiving change project-scaffolding. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 项目依赖管理
 
 项目 SHALL 使用 npm 管理依赖，MUST 包含以下核心依赖：
@@ -96,4 +99,3 @@ MUST 创建 newtab 页面的 Svelte 应用入口。
 - **WHEN** 扩展加载到浏览器
 - **THEN** 新标签页 SHALL 显示 Svelte 应用
 - **AND** 页面 MUST 包含基本的 HTML 结构和样式
-
