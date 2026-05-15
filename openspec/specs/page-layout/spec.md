@@ -1,8 +1,11 @@
 # page-layout Specification
 
 ## Purpose
+
 TBD - created by archiving change basic-page-layout. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: 页面布局
 
 新标签页 SHALL 展示双栏布局，左侧为书签区域，右侧为便签区域。
@@ -12,9 +15,122 @@ TBD - created by archiving change basic-page-layout. Update Purpose after archiv
 - **WHEN** 页面在桌面端（宽度 >= 768px）加载
 - **THEN** 左侧显示书签区域占位
 - **AND** 右侧显示便签区域占位
+- **AND** 两个区域使用统一的样式
 
 #### Scenario: 移动端显示单栏布局
 
 - **WHEN** 页面在移动端（宽度 < 768px）加载
 - **THEN** 书签区域和便签区域垂直堆叠
+- **AND** 堆叠布局使用统一的样式
 
+### Requirement: 页面背景
+
+系统应为新标签页提供统一的背景样式。
+
+#### Scenario: 页面背景渐变
+
+- **WHEN** 页面加载时
+- **THEN** 系统使用渐变背景（from-slate-900 to-slate-800）
+- **AND** 渐变方向为从左上到右下（bg-gradient-to-br）
+
+#### Scenario: 页面最小高度
+
+- **WHEN** 页面加载时
+- **THEN** 系统使用最小高度为全屏（min-h-screen）
+
+### Requirement: 页面标题
+
+系统应在页面顶部显示应用标题。
+
+#### Scenario: 标题显示
+
+- **WHEN** 页面加载时
+- **THEN** 系统在顶部显示标题 "JustNewTab"
+- **AND** 标题使用大号字体（text-3xl）
+- **AND** 标题使用粗体（font-bold）
+- **AND** 标题使用白色文本（text-white）
+- **AND** 标题使用底部外边距（mb-6）
+
+### Requirement: 区域容器样式
+
+系统应为书签区域和便签区域提供统一的容器样式。
+
+#### Scenario: 区域容器外观
+
+- **WHEN** 区域容器显示时
+- **THEN** 系统使用半透明深色背景（bg-slate-800/50）
+- **AND** 使用圆角（rounded-xl）
+- **AND** 使用内边距（p-5）
+
+#### Scenario: 区域容器间距
+
+- **WHEN** 多个区域容器显示时
+- **THEN** 系统使用统一的间距（gap-6）
+
+### Requirement: 区域标题
+
+系统应为每个区域显示标题。
+
+#### Scenario: 便签区域标题
+
+- **WHEN** 便签区域显示时
+- **THEN** 系统显示标题 "便签"
+- **AND** 标题使用中等字体大小（text-xl）
+- **AND** 标题使用半粗体（font-semibold）
+- **AND** 标题使用白色文本（text-white）
+- **AND** 标题使用底部外边距（mb-4）
+
+#### Scenario: 区域占位文本
+
+- **WHEN** 区域内容尚未实现时
+- **THEN** 系统显示占位文本
+- **AND** 占位文本使用灰色文本（text-slate-400）
+
+### Requirement: 响应式网格布局
+
+系统应使用响应式网格布局来排列区域。
+
+#### Scenario: 网格布局配置
+
+- **WHEN** 页面在桌面端显示时
+- **THEN** 系统使用 2 列网格布局（lg:grid-cols-2）
+- **AND** 使用 1 列布局在移动端（grid-cols-1）
+
+#### Scenario: 网格间距
+
+- **WHEN** 网格布局显示时
+- **THEN** 系统使用统一的网格间距（gap-6）
+
+### Requirement: 页面内边距
+
+系统应为页面内容提供统一的内边距。
+
+#### Scenario: 页面内边距
+
+- **WHEN** 页面加载时
+- **THEN** 系统使用内边距（p-6）
+- **AND** 内边距在所有方向上相等
+
+### Requirement: 页面样式一致性
+
+系统应确保所有页面元素使用统一的视觉样式。
+
+#### Scenario: 颜色系统
+
+- **WHEN** 页面元素显示时
+- **THEN** 系统使用 slate 色系作为基础颜色
+- **AND** 深色元素使用 slate-800 和 slate-900
+- **AND** 浅色元素使用 slate-300 和 slate-400
+
+#### Scenario: 字体系统
+
+- **WHEN** 文本显示时
+- **THEN** 系统使用系统字体栈
+- **AND** 标题使用较大字体
+- **AND** 正文使用标准字体大小
+
+#### Scenario: 间距系统
+
+- **WHEN** 元素间距设置时
+- **THEN** 系统使用 Tailwind 的默认间距比例
+- **AND** 保持一致的间距节奏
