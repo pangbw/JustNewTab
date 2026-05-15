@@ -66,6 +66,8 @@
   class="bookmark-block relative"
   style="border-left: 3px solid {block.color}"
   draggable="true"
+  role="region"
+  aria-label={block.name}
   ondragstart={handleDragStart}
   ondragover={handleDragOver}
   ondrop={handleDrop}
@@ -95,7 +97,6 @@
           class="bg-transparent text-jnt-text-primary font-jnt-medium outline-none flex-1 min-w-0"
           onkeydown={handleKeydown}
           onblur={handleSaveEdit}
-          autofocus
         />
       {:else}
         <h3

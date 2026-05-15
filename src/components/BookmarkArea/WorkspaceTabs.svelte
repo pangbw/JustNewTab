@@ -59,6 +59,7 @@
       tabindex="0"
       onclick={() => setActiveWorkspace(workspace.id)}
       ondblclick={() => handleStartEdit(workspace)}
+      onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveWorkspace(workspace.id); } }}
     >
       {#if editingId === workspace.id}
         <input
@@ -67,7 +68,6 @@
           class="bg-transparent text-jnt-text-primary outline-none w-24 text-jnt-sm"
           onkeydown={(e) => handleKeydown(e, 'edit')}
           onblur={handleSaveEdit}
-          autofocus
         />
       {:else}
         <span class="text-jnt-sm whitespace-nowrap">{workspace.name}</span>
@@ -94,7 +94,6 @@
       class="bg-jnt-bg-elevated/50 text-jnt-text-primary text-jnt-sm px-jnt-3 py-1.5 rounded-jnt-lg outline-none w-32"
       onkeydown={(e) => handleKeydown(e, 'create')}
       onblur={() => { if (!newWorkspaceName.trim()) isCreating = false; }}
-      autofocus
     />
   {:else if $workspaces.length < MAX_WORKSPACES}
     <button

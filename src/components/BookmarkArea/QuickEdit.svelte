@@ -13,9 +13,16 @@
 
   const { bookmark, blockId, x, y, onClose }: Props = $props();
 
-  let title = $state(bookmark.displayTitle ?? bookmark.title);
-  let url = $state(bookmark.url);
-  let description = $state(bookmark.description ?? '');
+  let title = $state('');
+  let url = $state('');
+  let description = $state('');
+
+  // Initialize from props
+  $effect(() => {
+    title = bookmark.displayTitle ?? bookmark.title;
+    url = bookmark.url;
+    description = bookmark.description ?? '';
+  });
 
   const schema = z.object({
     title: z.string().min(1, '标题不能为空').max(100, '标题最多100字符'),

@@ -11,10 +11,18 @@
 
   const { block, x, y, onClose }: Props = $props();
 
-  let name = $state(block.name);
-  let color = $state(block.color);
-  let icon = $state(block.icon ?? '');
-  let layout = $state<BlockLayout>(block.layout ?? 'grid');
+  let name = $state('');
+  let color = $state('');
+  let icon = $state('');
+  let layout = $state<BlockLayout>('grid');
+
+  // Initialize from props
+  $effect(() => {
+    name = block.name;
+    color = block.color;
+    icon = block.icon ?? '';
+    layout = block.layout ?? 'grid';
+  });
 
   const PRESET_COLORS = [
     '#6366f1', '#8b5cf6', '#ec4899', '#ef4444',
@@ -87,26 +95,30 @@
     </div>
 
     <div>
-      <label class="text-jnt-xs text-jnt-text-tertiary mb-1 block">颜色</label>
-      <div class="flex flex-wrap gap-jnt-2">
+      <span class="text-jnt-xs text-jnt-text-tertiary mb-1 block">颜色</span>
+      <div class="flex flex-wrap gap-jnt-2" role="radiogroup" aria-label="选择颜色">
         {#each PRESET_COLORS as presetColor (presetColor)}
           <button
             class="w-6 h-6 rounded-full border-2 transition-transform {color === presetColor ? 'border-jnt-brand-primary scale-110' : 'border-transparent hover:scale-110'}"
             style="background-color: {presetColor}"
             onclick={() => { color = presetColor; }}
             aria-label="选择颜色 {presetColor}"
+            role="radio"
+            aria-checked={color === presetColor}
           ></button>
         {/each}
       </div>
     </div>
 
     <div>
-      <label class="text-jnt-xs text-jnt-text-tertiary mb-1 block">图标</label>
-      <div class="flex flex-wrap gap-1.5">
+      <span class="text-jnt-xs text-jnt-text-tertiary mb-1 block">图标</span>
+      <div class="flex flex-wrap gap-1.5" role="radiogroup" aria-label="选择图标">
         <button
           class="w-7 h-7 rounded-jnt-lg border-2 text-jnt-sm flex items-center justify-center transition-transform {icon === '' ? 'border-jnt-brand-primary scale-110' : 'border-transparent hover:scale-110'}"
           onclick={() => { icon = ''; }}
           aria-label="无图标"
+          role="radio"
+          aria-checked={icon === ''}
         >
           <span class="text-jnt-text-placeholder text-jnt-xs">无</span>
         </button>
@@ -115,6 +127,8 @@
             class="w-7 h-7 rounded-jnt-lg border-2 text-jnt-sm flex items-center justify-center transition-transform {icon === presetIcon ? 'border-jnt-brand-primary scale-110' : 'border-transparent hover:scale-110'}"
             onclick={() => { icon = presetIcon; }}
             aria-label="选择图标 {presetIcon}"
+            role="radio"
+            aria-checked={icon === presetIcon}
           >
             {presetIcon}
           </button>
@@ -123,12 +137,14 @@
     </div>
 
     <div>
-      <label class="text-jnt-xs text-jnt-text-tertiary mb-1 block">布局</label>
-      <div class="flex gap-jnt-2">
+      <span class="text-jnt-xs text-jnt-text-tertiary mb-1 block">布局</span>
+      <div class="flex gap-jnt-2" role="radiogroup" aria-label="选择布局">
         {#each LAYOUT_OPTIONS as option (option.value)}
           <button
             class="flex items-center gap-1.5 px-jnt-3 py-1.5 rounded-jnt-lg border text-jnt-xs transition-colors {layout === option.value ? 'border-jnt-brand-primary bg-jnt-brand-primary/20 text-jnt-brand-50' : 'border-jnt-bg-elevated text-jnt-text-tertiary hover:border-jnt-text-placeholder'}"
             onclick={() => { layout = option.value; }}
+            role="radio"
+            aria-checked={layout === option.value}
           >
             <span>{option.icon}</span>
             <span>{option.label}</span>
