@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
-  import { bookmarkBlocks, addBlock, addBookmark, reorderBlocks } from '@/stores/bookmarkStore';
-  import { initializeWorkspace, activeWorkspace, activeWorkspaceId } from '@/stores/workspaceStore';
+  import { bookmarkBlocks, addBlock, addBookmark, reorderBlocks, removeBlock, removeBookmark } from '@/stores/bookmarkStore';
+  import { initializeWorkspace, activeWorkspace, activeWorkspaceId, setActiveWorkspace } from '@/stores/workspaceStore';
   import { clearSearchState } from '@/stores/searchStore';
   import { refreshOpenTabs } from '@/stores/tabStore';
   import { endDrag, cancelDrag } from '@/stores/dragStore';
@@ -54,9 +54,7 @@
       try {
         const { workspaceId, scrollY } = JSON.parse(savedState);
         if (workspaceId) {
-          import('@/stores/workspaceStore').then(({ setActiveWorkspace }) => {
-            setActiveWorkspace(workspaceId);
-          });
+          setActiveWorkspace(workspaceId);
         }
         if (scrollY) {
           setTimeout(() => window.scrollTo(0, scrollY), 0);
@@ -165,7 +163,7 @@
         if (id === 'edit-block') {
           quickConfig = { block, x: e.clientX, y: e.clientY };
         } else if (id === 'delete-block') {
-          import('@/stores/bookmarkStore').then(({ removeBlock }) => removeBlock(block.id));
+          removeBlock(block.id);
         } else if (id === 'add-bookmark') {
           addBookmark(block.id, { title: '新书签', url: 'https://example.com' });
         }
@@ -196,9 +194,7 @@
         } else if (id === 'copy-url') {
           navigator.clipboard.writeText(bookmark.url);
         } else if (id === 'delete-bookmark') {
-          import('@/stores/bookmarkStore').then(({ removeBookmark }) =>
-            removeBookmark(blockId, bookmark.id)
-          );
+          removeBookmark(blockId, bookmark.id);
         }
       },
     };

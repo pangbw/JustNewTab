@@ -2,6 +2,7 @@
   import type { Bookmark } from '@/types/bookmark';
   import { isUrlOpen, closeTab } from '@/stores/tabStore';
   import { startDrag, updateDragTarget } from '@/stores/dragStore';
+  import browser from 'webextension-polyfill';
 
   interface Props {
     bookmark: Bookmark;
@@ -32,11 +33,8 @@
 
   function handleCloseTab(e: MouseEvent): void {
     e.stopPropagation();
-    // Find tab by URL and close it
-    import('webextension-polyfill').then(({ default: browser }) => {
-      browser.tabs.query({ url: bookmark.url }).then((tabs) => {
-        if (tabs[0]?.id) closeTab(tabs[0].id);
-      });
+    browser.tabs.query({ url: bookmark.url }).then((tabs) => {
+      if (tabs[0]?.id) closeTab(tabs[0].id);
     });
   }
 
@@ -49,6 +47,13 @@
     e.preventDefault();
     updateDragTarget(bookmark.id);
   }
+
+  function handleKeyDown(e: KeyboardEvent): void {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick(e as unknown as MouseEvent);
+    }
+  }
 </script>
 
 <div
@@ -59,6 +64,7 @@
   draggable="true"
   onclick={handleClick}
   oncontextmenu={handleContextMenu}
+  onkeydown={handleKeyDown}
   ondragstart={handleDragStart}
   ondragover={handleDragOver}
 >

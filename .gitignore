@@ -61,3 +61,4 @@ web-ext-artifacts/
 
 # Claude Code
 .claude/
+pnpm-workspace.yaml
