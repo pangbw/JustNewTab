@@ -30,8 +30,8 @@ TBD - created by archiving change basic-page-layout. Update Purpose after archiv
 #### Scenario: 页面背景渐变
 
 - **WHEN** 页面加载时
-- **THEN** 系统使用渐变背景（from-slate-900 to-slate-800）
-- **AND** 渐变方向为从左上到右下（bg-gradient-to-br）
+- **THEN** 系统使用设计令牌定义的背景色
+- **AND** 使用最深背景色（var(--jnt-bg-primary)）
 
 #### Scenario: 页面最小高度
 
@@ -46,10 +46,10 @@ TBD - created by archiving change basic-page-layout. Update Purpose after archiv
 
 - **WHEN** 页面加载时
 - **THEN** 系统在顶部显示标题 "JustNewTab"
-- **AND** 标题使用大号字体（text-3xl）
-- **AND** 标题使用粗体（font-bold）
-- **AND** 标题使用白色文本（text-white）
-- **AND** 标题使用底部外边距（mb-6）
+- **AND** 标题使用设计令牌定义的字体大小（var(--jnt-text-3xl)）
+- **AND** 标题使用设计令牌定义的字体粗细（var(--jnt-font-bold)）
+- **AND** 标题使用设计令牌定义的主文本色（var(--jnt-text-primary)）
+- **AND** 标题使用设计令牌定义的底部外边距（var(--jnt-space-6)）
 
 ### Requirement: 区域容器样式
 
@@ -58,14 +58,15 @@ TBD - created by archiving change basic-page-layout. Update Purpose after archiv
 #### Scenario: 区域容器外观
 
 - **WHEN** 区域容器显示时
-- **THEN** 系统使用半透明深色背景（bg-slate-800/50）
-- **AND** 使用圆角（rounded-xl）
-- **AND** 使用内边距（p-5）
+- **THEN** 系统使用设计令牌定义的背景色（var(--jnt-bg-tertiary)）
+- **AND** 使用设计令牌定义的圆角（var(--jnt-radius-xl)）
+- **AND** 使用设计令牌定义的内边距（var(--jnt-space-5)）
+- **AND** 使用设计令牌定义的阴影（var(--jnt-shadow-md)）
 
 #### Scenario: 区域容器间距
 
 - **WHEN** 多个区域容器显示时
-- **THEN** 系统使用统一的间距（gap-6）
+- **THEN** 系统使用设计令牌定义的间距（var(--jnt-space-6)）
 
 ### Requirement: 区域标题
 
@@ -75,41 +76,16 @@ TBD - created by archiving change basic-page-layout. Update Purpose after archiv
 
 - **WHEN** 便签区域显示时
 - **THEN** 系统显示标题 "便签"
-- **AND** 标题使用中等字体大小（text-xl）
-- **AND** 标题使用半粗体（font-semibold）
-- **AND** 标题使用白色文本（text-white）
-- **AND** 标题使用底部外边距（mb-4）
+- **AND** 标题使用设计令牌定义的字体大小（var(--jnt-text-xl)）
+- **AND** 标题使用设计令牌定义的字体粗细（var(--jnt-font-semibold)）
+- **AND** 标题使用设计令牌定义的主文本色（var(--jnt-text-primary)）
+- **AND** 标题使用设计令牌定义的底部外边距（var(--jnt-space-4)）
 
 #### Scenario: 区域占位文本
 
 - **WHEN** 区域内容尚未实现时
 - **THEN** 系统显示占位文本
-- **AND** 占位文本使用灰色文本（text-slate-400）
-
-### Requirement: 响应式网格布局
-
-系统应使用响应式网格布局来排列区域。
-
-#### Scenario: 网格布局配置
-
-- **WHEN** 页面在桌面端显示时
-- **THEN** 系统使用 2 列网格布局（lg:grid-cols-2）
-- **AND** 使用 1 列布局在移动端（grid-cols-1）
-
-#### Scenario: 网格间距
-
-- **WHEN** 网格布局显示时
-- **THEN** 系统使用统一的网格间距（gap-6）
-
-### Requirement: 页面内边距
-
-系统应为页面内容提供统一的内边距。
-
-#### Scenario: 页面内边距
-
-- **WHEN** 页面加载时
-- **THEN** 系统使用内边距（p-6）
-- **AND** 内边距在所有方向上相等
+- **AND** 占位文本使用设计令牌定义的辅助文本色（var(--jnt-text-tertiary)）
 
 ### Requirement: 页面样式一致性
 
@@ -118,19 +94,27 @@ TBD - created by archiving change basic-page-layout. Update Purpose after archiv
 #### Scenario: 颜色系统
 
 - **WHEN** 页面元素显示时
-- **THEN** 系统使用 slate 色系作为基础颜色
-- **AND** 深色元素使用 slate-800 和 slate-900
-- **AND** 浅色元素使用 slate-300 和 slate-400
+- **THEN** 系统使用设计令牌定义的颜色系统
+- **AND** 背景色使用设计令牌
+- **AND** 文本色使用设计令牌
 
 #### Scenario: 字体系统
 
 - **WHEN** 文本显示时
-- **THEN** 系统使用系统字体栈
-- **AND** 标题使用较大字体
-- **AND** 正文使用标准字体大小
+- **THEN** 系统使用设计令牌定义的字体系统
+- **AND** 字体大小使用设计令牌
+- **AND** 字体粗细使用设计令牌
 
 #### Scenario: 间距系统
 
 - **WHEN** 元素间距设置时
-- **THEN** 系统使用 Tailwind 的默认间距比例
+- **THEN** 系统使用设计令牌定义的间距系统
 - **AND** 保持一致的间距节奏
+
+#### Scenario: MiMo 风格应用
+
+- **WHEN** 页面整体呈现时
+- **THEN** 系统参考小米 MiMo 网站的设计风格
+- **AND** 使用深色主题，高对比度
+- **AND** 大面积留白，呼吸感强
+- **AND** 圆角矩形组件，柔和阴影
