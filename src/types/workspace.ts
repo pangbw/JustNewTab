@@ -1,4 +1,4 @@
-import type { BookmarkBlock } from './bookmark';
+import type { BookmarkBlock } from "./bookmark";
 
 export interface Workspace {
   id: string;
@@ -10,7 +10,7 @@ export interface WorkspaceSettings {
   defaultBlockColor: string;
   showFavicon: boolean;
   itemsPerRow: number;
-  bookmarkOpenMode: 'current-tab' | 'new-tab' | 'new-window';
+  bookmarkOpenMode: "current-tab" | "new-tab" | "new-window";
 }
 
 export interface WorkspaceConfig {

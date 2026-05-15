@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 import type {
   BookmarkBlock,
   Bookmark,
@@ -6,13 +6,13 @@ import type {
   BookmarkBlockUpdateInput,
   BookmarkCreateInput,
   BookmarkUpdateInput,
-} from '@/types/bookmark';
+} from "@/types/bookmark";
 
 function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 }
 
-const DEFAULT_BLOCK_COLOR = '#6366f1';
+const DEFAULT_BLOCK_COLOR = "#6366f1";
 
 export const bookmarkBlocks = writable<BookmarkBlock[]>([]);
 
@@ -24,7 +24,7 @@ export function addBlock(input: BookmarkBlockCreateInput): void {
       name: input.name,
       color: input.color ?? DEFAULT_BLOCK_COLOR,
       icon: input.icon,
-      layout: input.layout ?? 'list',
+      layout: input.layout ?? "list",
       isCollapsed: false,
       bookmarks: [],
       position: { x: 0, y: blocks.length },
@@ -32,16 +32,21 @@ export function addBlock(input: BookmarkBlockCreateInput): void {
   ]);
 }
 
-export function updateBlock(blockId: string, input: BookmarkBlockUpdateInput): void {
+export function updateBlock(
+  blockId: string,
+  input: BookmarkBlockUpdateInput,
+): void {
   bookmarkBlocks.update((blocks) =>
     blocks.map((block) =>
-      block.id === blockId ? { ...block, ...input } : block
-    )
+      block.id === blockId ? { ...block, ...input } : block,
+    ),
   );
 }
 
 export function removeBlock(blockId: string): void {
-  bookmarkBlocks.update((blocks) => blocks.filter((block) => block.id !== blockId));
+  bookmarkBlocks.update((blocks) =>
+    blocks.filter((block) => block.id !== blockId),
+  );
 }
 
 export function addBookmark(blockId: string, input: BookmarkCreateInput): void {
@@ -61,15 +66,15 @@ export function addBookmark(blockId: string, input: BookmarkCreateInput): void {
               },
             ],
           }
-        : block
-    )
+        : block,
+    ),
   );
 }
 
 export function updateBookmark(
   blockId: string,
   bookmarkId: string,
-  input: BookmarkUpdateInput
+  input: BookmarkUpdateInput,
 ): void {
   bookmarkBlocks.update((blocks) =>
     blocks.map((block) =>
@@ -77,11 +82,11 @@ export function updateBookmark(
         ? {
             ...block,
             bookmarks: block.bookmarks.map((bm) =>
-              bm.id === bookmarkId ? { ...bm, ...input } : bm
+              bm.id === bookmarkId ? { ...bm, ...input } : bm,
             ),
           }
-        : block
-    )
+        : block,
+    ),
   );
 }
 
@@ -93,16 +98,18 @@ export function removeBookmark(blockId: string, bookmarkId: string): void {
             ...block,
             bookmarks: block.bookmarks.filter((bm) => bm.id !== bookmarkId),
           }
-        : block
-    )
+        : block,
+    ),
   );
 }
 
 export function toggleBlockCollapse(blockId: string): void {
   bookmarkBlocks.update((blocks) =>
     blocks.map((block) =>
-      block.id === blockId ? { ...block, isCollapsed: !block.isCollapsed } : block
-    )
+      block.id === blockId
+        ? { ...block, isCollapsed: !block.isCollapsed }
+        : block,
+    ),
   );
 }
 

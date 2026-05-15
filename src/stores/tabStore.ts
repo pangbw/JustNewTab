@@ -1,5 +1,5 @@
-import { writable } from 'svelte/store';
-import browser from 'webextension-polyfill';
+import { writable } from "svelte/store";
+import browser from "webextension-polyfill";
 
 export const openUrls = writable<Set<string>>(new Set());
 
@@ -7,7 +7,7 @@ function normalizeUrl(url: string): string {
   try {
     const parsed = new URL(url);
     let normalized = parsed.hostname + parsed.pathname;
-    normalized = normalized.replace(/\/+$/, '');
+    normalized = normalized.replace(/\/+$/, "");
     return normalized.toLowerCase();
   } catch {
     return url.toLowerCase();
@@ -32,9 +32,7 @@ export async function refreshOpenTabs(): Promise<void> {
   try {
     const tabs = await browser.tabs.query({});
     const urls = new Set(
-      tabs
-        .map((tab) => tab.url)
-        .filter((url): url is string => !!url)
+      tabs.map((tab) => tab.url).filter((url): url is string => !!url),
     );
     openUrls.set(urls);
   } catch {

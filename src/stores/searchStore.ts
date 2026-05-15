@@ -1,14 +1,14 @@
-import { writable, derived } from 'svelte/store';
+import { writable, derived } from "svelte/store";
 
-const STORAGE_KEY_QUERY = 'justnewtab_search_query';
-const STORAGE_KEY_HISTORY = 'justnewtab_search_history';
+const STORAGE_KEY_QUERY = "justnewtab_search_query";
+const STORAGE_KEY_HISTORY = "justnewtab_search_history";
 const MAX_HISTORY = 5;
 
 function loadQuery(): string {
   try {
-    return localStorage.getItem(STORAGE_KEY_QUERY) ?? '';
+    return localStorage.getItem(STORAGE_KEY_QUERY) ?? "";
   } catch {
-    return '';
+    return "";
   }
 }
 
@@ -63,7 +63,7 @@ export function clearHistory(): void {
 }
 
 export function clearSearchState(): void {
-  searchQuery.set('');
+  searchQuery.set("");
   try {
     localStorage.removeItem(STORAGE_KEY_QUERY);
   } catch {

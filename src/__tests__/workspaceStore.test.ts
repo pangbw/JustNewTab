@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { get } from 'svelte/store';
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { get } from "svelte/store";
 import {
   workspaces,
   activeWorkspaceId,
@@ -11,74 +11,78 @@ import {
   setActiveWorkspace,
   updateSettings,
   initializeWorkspace,
-} from '@/stores/workspaceStore';
+} from "@/stores/workspaceStore";
 
 // Mock localStorage
 const store: Record<string, string> = {};
 const localStorageMock = {
   getItem: vi.fn((key: string) => store[key] ?? null),
-  setItem: vi.fn((key: string, value: string) => { store[key] = value; }),
-  removeItem: vi.fn((key: string) => { delete store[key]; }),
-  clear: vi.fn(() => { Object.keys(store).forEach((k) => delete store[k]); }),
+  setItem: vi.fn((key: string, value: string) => {
+    store[key] = value;
+  }),
+  removeItem: vi.fn((key: string) => {
+    delete store[key];
+  }),
+  clear: vi.fn(() => {
+    Object.keys(store).forEach((k) => delete store[k]);
+  }),
 };
-Object.defineProperty(globalThis, 'localStorage', { value: localStorageMock });
+Object.defineProperty(globalThis, "localStorage", { value: localStorageMock });
 
-describe('workspaceStore', () => {
+describe("workspaceStore", () => {
   beforeEach(() => {
     localStorageMock.clear();
     vi.clearAllMocks();
     workspaces.set([]);
-    activeWorkspaceId.set('');
+    activeWorkspaceId.set("");
   });
 
-  describe('initializeWorkspace', () => {
-    it('should create default workspace when none exists', () => {
+  describe("initializeWorkspace", () => {
+    it("should create default workspace when none exists", () => {
       initializeWorkspace();
 
       const ws = get(workspaces);
       expect(ws).toHaveLength(1);
-      expect(ws[0].name).toBe('默认工作区');
+      expect(ws[0].name).toBe("默认工作区");
       expect(ws[0].blocks).toEqual([]);
       expect(get(activeWorkspaceId)).toBe(ws[0].id);
     });
 
-    it('should load existing workspaces from storage', () => {
-      const existing = [
-        { id: 'ws1', name: 'My Workspace', blocks: [] },
-      ];
-      store['justnewtab_workspaces'] = JSON.stringify(existing);
-      store['justnewtab_active_workspace'] = 'ws1';
+    it("should load existing workspaces from storage", () => {
+      const existing = [{ id: "ws1", name: "My Workspace", blocks: [] }];
+      store["justnewtab_workspaces"] = JSON.stringify(existing);
+      store["justnewtab_active_workspace"] = "ws1";
 
       initializeWorkspace();
 
       expect(get(workspaces)).toEqual(existing);
-      expect(get(activeWorkspaceId)).toBe('ws1');
+      expect(get(activeWorkspaceId)).toBe("ws1");
     });
   });
 
-  describe('addWorkspace', () => {
-    it('should add a new workspace', () => {
+  describe("addWorkspace", () => {
+    it("should add a new workspace", () => {
       initializeWorkspace();
-      addWorkspace({ name: 'Work' });
+      addWorkspace({ name: "Work" });
 
       const ws = get(workspaces);
       expect(ws).toHaveLength(2);
-      expect(ws[1].name).toBe('Work');
+      expect(ws[1].name).toBe("Work");
     });
 
-    it('should switch to new workspace', () => {
+    it("should switch to new workspace", () => {
       initializeWorkspace();
-      addWorkspace({ name: 'New' });
+      addWorkspace({ name: "New" });
 
       const ws = get(workspaces);
       expect(get(activeWorkspaceId)).toBe(ws[1].id);
     });
   });
 
-  describe('removeWorkspace', () => {
-    it('should remove a workspace', () => {
+  describe("removeWorkspace", () => {
+    it("should remove a workspace", () => {
       initializeWorkspace();
-      addWorkspace({ name: 'To Remove' });
+      addWorkspace({ name: "To Remove" });
       const ws = get(workspaces);
       const toRemove = ws[1];
 
@@ -87,7 +91,7 @@ describe('workspaceStore', () => {
       expect(get(workspaces)).toHaveLength(1);
     });
 
-    it('should not remove the last workspace', () => {
+    it("should not remove the last workspace", () => {
       initializeWorkspace();
       const ws = get(workspaces);
 
@@ -96,9 +100,9 @@ describe('workspaceStore', () => {
       expect(get(workspaces)).toHaveLength(1);
     });
 
-    it('should switch to first workspace when removing active', () => {
+    it("should switch to first workspace when removing active", () => {
       initializeWorkspace();
-      addWorkspace({ name: 'Second' });
+      addWorkspace({ name: "Second" });
       const ws = get(workspaces);
 
       removeWorkspace(ws[1].id);
@@ -107,21 +111,21 @@ describe('workspaceStore', () => {
     });
   });
 
-  describe('renameWorkspace', () => {
-    it('should rename a workspace', () => {
+  describe("renameWorkspace", () => {
+    it("should rename a workspace", () => {
       initializeWorkspace();
       const ws = get(workspaces);
 
-      renameWorkspace(ws[0].id, 'New Name');
+      renameWorkspace(ws[0].id, "New Name");
 
-      expect(get(workspaces)[0].name).toBe('New Name');
+      expect(get(workspaces)[0].name).toBe("New Name");
     });
   });
 
-  describe('setActiveWorkspace', () => {
-    it('should set active workspace', () => {
+  describe("setActiveWorkspace", () => {
+    it("should set active workspace", () => {
       initializeWorkspace();
-      addWorkspace({ name: 'Second' });
+      addWorkspace({ name: "Second" });
       const ws = get(workspaces);
 
       setActiveWorkspace(ws[0].id);
@@ -130,24 +134,24 @@ describe('workspaceStore', () => {
     });
   });
 
-  describe('activeWorkspace', () => {
-    it('should derive active workspace', () => {
+  describe("activeWorkspace", () => {
+    it("should derive active workspace", () => {
       initializeWorkspace();
       const ws = get(activeWorkspace);
 
       expect(ws).toBeDefined();
-      expect(ws?.name).toBe('默认工作区');
+      expect(ws?.name).toBe("默认工作区");
     });
   });
 
-  describe('updateSettings', () => {
-    it('should update settings', () => {
-      updateSettings({ defaultBlockColor: '#ef4444' });
+  describe("updateSettings", () => {
+    it("should update settings", () => {
+      updateSettings({ defaultBlockColor: "#ef4444" });
 
-      expect(get(settings).defaultBlockColor).toBe('#ef4444');
+      expect(get(settings).defaultBlockColor).toBe("#ef4444");
     });
 
-    it('should merge settings', () => {
+    it("should merge settings", () => {
       updateSettings({ showFavicon: false });
 
       const s = get(settings);

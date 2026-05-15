@@ -1,20 +1,20 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { get } from 'svelte/store';
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { get } from "svelte/store";
 import {
   openUrls,
   isUrlOpen,
   refreshOpenTabs,
   closeTab,
-} from '@/stores/tabStore';
+} from "@/stores/tabStore";
 
 // Mock browser.tabs API
 const mockTabs = [
-  { id: 1, url: 'https://google.com', title: 'Google' },
-  { id: 2, url: 'https://github.com', title: 'GitHub' },
-  { id: 3, url: 'https://example.com/path/', title: 'Example' },
+  { id: 1, url: "https://google.com", title: "Google" },
+  { id: 2, url: "https://github.com", title: "GitHub" },
+  { id: 3, url: "https://example.com/path/", title: "Example" },
 ];
 
-vi.mock('webextension-polyfill', () => ({
+vi.mock("webextension-polyfill", () => ({
   default: {
     tabs: {
       query: vi.fn(() => Promise.resolve(mockTabs)),
@@ -26,45 +26,45 @@ vi.mock('webextension-polyfill', () => ({
   },
 }));
 
-describe('tabStore', () => {
+describe("tabStore", () => {
   beforeEach(() => {
     openUrls.set(new Set());
   });
 
-  describe('isUrlOpen', () => {
-    it('should return true for open URL', () => {
-      openUrls.set(new Set(['https://google.com']));
+  describe("isUrlOpen", () => {
+    it("should return true for open URL", () => {
+      openUrls.set(new Set(["https://google.com"]));
 
-      expect(isUrlOpen('https://google.com')).toBe(true);
+      expect(isUrlOpen("https://google.com")).toBe(true);
     });
 
-    it('should return false for non-open URL', () => {
-      openUrls.set(new Set(['https://google.com']));
+    it("should return false for non-open URL", () => {
+      openUrls.set(new Set(["https://google.com"]));
 
-      expect(isUrlOpen('https://example.com')).toBe(false);
+      expect(isUrlOpen("https://example.com")).toBe(false);
     });
 
-    it('should match ignoring trailing slash', () => {
-      openUrls.set(new Set(['https://example.com/path/']));
+    it("should match ignoring trailing slash", () => {
+      openUrls.set(new Set(["https://example.com/path/"]));
 
-      expect(isUrlOpen('https://example.com/path')).toBe(true);
+      expect(isUrlOpen("https://example.com/path")).toBe(true);
     });
 
-    it('should match ignoring protocol difference', () => {
-      openUrls.set(new Set(['https://google.com']));
+    it("should match ignoring protocol difference", () => {
+      openUrls.set(new Set(["https://google.com"]));
 
-      expect(isUrlOpen('http://google.com')).toBe(true);
+      expect(isUrlOpen("http://google.com")).toBe(true);
     });
 
-    it('should match ignoring fragment', () => {
-      openUrls.set(new Set(['https://example.com/page#section']));
+    it("should match ignoring fragment", () => {
+      openUrls.set(new Set(["https://example.com/page#section"]));
 
-      expect(isUrlOpen('https://example.com/page')).toBe(true);
+      expect(isUrlOpen("https://example.com/page")).toBe(true);
     });
   });
 
-  describe('refreshOpenTabs', () => {
-    it('should populate open URLs from tabs', async () => {
+  describe("refreshOpenTabs", () => {
+    it("should populate open URLs from tabs", async () => {
       await refreshOpenTabs();
 
       const urls = get(openUrls);
@@ -72,9 +72,9 @@ describe('tabStore', () => {
     });
   });
 
-  describe('closeTab', () => {
-    it('should call browser.tabs.remove', async () => {
-      const browser = (await import('webextension-polyfill')).default;
+  describe("closeTab", () => {
+    it("should call browser.tabs.remove", async () => {
+      const browser = (await import("webextension-polyfill")).default;
 
       await closeTab(1);
 

@@ -1,30 +1,34 @@
-import { writable, derived } from 'svelte/store';
-import type { Workspace, WorkspaceSettings, WorkspaceCreateInput } from '@/types/workspace';
-import { saveToStorage, loadFromStorage } from '@/utils/storage';
+import { writable, derived } from "svelte/store";
+import type {
+  Workspace,
+  WorkspaceSettings,
+  WorkspaceCreateInput,
+} from "@/types/workspace";
+import { saveToStorage, loadFromStorage } from "@/utils/storage";
 
 function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 }
 
-const WORKSPACES_KEY = 'justnewtab_workspaces';
-const ACTIVE_WORKSPACE_KEY = 'justnewtab_active_workspace';
-const SETTINGS_KEY = 'justnewtab_settings';
+const WORKSPACES_KEY = "justnewtab_workspaces";
+const ACTIVE_WORKSPACE_KEY = "justnewtab_active_workspace";
+const SETTINGS_KEY = "justnewtab_settings";
 
 const DEFAULT_SETTINGS: WorkspaceSettings = {
-  defaultBlockColor: '#6366f1',
+  defaultBlockColor: "#6366f1",
   showFavicon: true,
   itemsPerRow: 4,
-  bookmarkOpenMode: 'current-tab',
+  bookmarkOpenMode: "current-tab",
 };
 
 export const workspaces = writable<Workspace[]>([]);
-export const activeWorkspaceId = writable<string>('');
+export const activeWorkspaceId = writable<string>("");
 export const settings = writable<WorkspaceSettings>({ ...DEFAULT_SETTINGS });
 
 export const activeWorkspace = derived(
   [workspaces, activeWorkspaceId],
   ([$workspaces, $activeWorkspaceId]) =>
-    $workspaces.find((ws) => ws.id === $activeWorkspaceId) ?? null
+    $workspaces.find((ws) => ws.id === $activeWorkspaceId) ?? null,
 );
 
 // Persist on change
@@ -42,8 +46,11 @@ settings.subscribe((value) => {
 
 export function initializeWorkspace(): void {
   const saved = loadFromStorage<Workspace[]>(WORKSPACES_KEY, []);
-  const savedActiveId = loadFromStorage<string>(ACTIVE_WORKSPACE_KEY, '');
-  const savedSettings = loadFromStorage<Partial<WorkspaceSettings>>(SETTINGS_KEY, {});
+  const savedActiveId = loadFromStorage<string>(ACTIVE_WORKSPACE_KEY, "");
+  const savedSettings = loadFromStorage<Partial<WorkspaceSettings>>(
+    SETTINGS_KEY,
+    {},
+  );
 
   if (saved && saved.length > 0) {
     workspaces.set(saved);
@@ -51,7 +58,7 @@ export function initializeWorkspace(): void {
   } else {
     const defaultWs: Workspace = {
       id: generateId(),
-      name: '默认工作区',
+      name: "默认工作区",
       blocks: [],
     };
     workspaces.set([defaultWs]);
@@ -87,7 +94,7 @@ export function removeWorkspace(workspaceId: string): void {
 
 export function renameWorkspace(workspaceId: string, newName: string): void {
   workspaces.update((ws) =>
-    ws.map((w) => (w.id === workspaceId ? { ...w, name: newName } : w))
+    ws.map((w) => (w.id === workspaceId ? { ...w, name: newName } : w)),
   );
 }
 
@@ -107,7 +114,7 @@ function get_current_workspaces(): Workspace[] {
 }
 
 function get_current_active_id(): string {
-  let value = '';
+  let value = "";
   activeWorkspaceId.subscribe((v) => (value = v))();
   return value;
 }

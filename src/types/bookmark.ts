@@ -8,7 +8,7 @@ export interface Bookmark {
   displayTitle?: string;
 }
 
-export type BlockLayout = 'grid' | 'list';
+export type BlockLayout = "grid" | "list";
 
 export interface BookmarkBlock {
   id: string;

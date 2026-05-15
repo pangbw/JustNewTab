@@ -1,5 +1,5 @@
-import browser from 'webextension-polyfill';
-import type { Bookmarks } from 'webextension-polyfill';
+import browser from "webextension-polyfill";
+import type { Bookmarks } from "webextension-polyfill";
 
 export interface BookmarkTreeNode {
   id: string;
@@ -26,12 +26,16 @@ export async function getBookmarkTree(): Promise<BookmarkTreeNode[]> {
   return tree as BookmarkTreeNode[];
 }
 
-export async function searchBookmarks(query: string): Promise<BookmarkTreeNode[]> {
+export async function searchBookmarks(
+  query: string,
+): Promise<BookmarkTreeNode[]> {
   const results = await browser.bookmarks.search(query);
   return results as BookmarkTreeNode[];
 }
 
-export async function createBookmark(input: CreateBookmarkInput): Promise<BookmarkTreeNode> {
+export async function createBookmark(
+  input: CreateBookmarkInput,
+): Promise<BookmarkTreeNode> {
   const result = await browser.bookmarks.create({
     parentId: input.parentId,
     title: input.title,
@@ -47,7 +51,7 @@ export async function removeBookmark(bookmarkId: string): Promise<void> {
 
 export async function updateBookmark(
   bookmarkId: string,
-  changes: UpdateBookmarkInput
+  changes: UpdateBookmarkInput,
 ): Promise<BookmarkTreeNode> {
   const result = await browser.bookmarks.update(bookmarkId, {
     title: changes.title,
