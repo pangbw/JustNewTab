@@ -1,0 +1,156 @@
+/* JustNewTab Design Tokens */
+/* Royal Indigo Night Color Palette */
+
+:root {
+  /* ========================================
+     Color Tokens
+     ======================================== */
+
+  /* Background Colors */
+  --jnt-bg-primary: #0f172a; /* slate-950 - deepest background */
+  --jnt-bg-secondary: #1e293b; /* slate-900 - secondary background */
+  --jnt-bg-tertiary: #1e293b; /* slate-800 - card/block background */
+  --jnt-bg-elevated: #334155; /* slate-700 - hover/active background */
+
+  /* Text Colors */
+  --jnt-text-primary: #ffffff; /* white - primary text */
+  --jnt-text-secondary: #cbd5e1; /* slate-300 - secondary text */
+  --jnt-text-tertiary: #94a3b8; /* slate-400 - tertiary text */
+  --jnt-text-placeholder: #64748b; /* slate-500 - placeholder text */
+
+  /* Brand Colors - Royal Indigo Night */
+  --jnt-brand-50: #5c6bc0; /* Lightest brand color */
+  --jnt-brand-100: #3f51b5; /* Light brand color */
+  --jnt-brand-200: #303f9f; /* Medium brand color */
+  --jnt-brand-300: #283593; /* Dark brand color */
+  --jnt-brand-400: #1a237e; /* Darkest brand color */
+  --jnt-brand-primary: #3f51b5; /* Primary brand color */
+  --jnt-brand-hover: #5c6bc0; /* Brand hover color */
+  --jnt-brand-active: #303f9f; /* Brand active color */
+
+  /* Semantic Colors */
+  --jnt-color-success: #22c55e; /* green-500 */
+  --jnt-color-warning: #eab308; /* yellow-500 */
+  --jnt-color-error: #ef4444; /* red-500 */
+  --jnt-color-info: #3b82f6; /* blue-500 */
+
+  /* ========================================
+     Typography Tokens
+     ======================================== */
+
+  /* Font Families */
+  --jnt-font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --jnt-font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  /* Font Sizes */
+  --jnt-text-xs: 0.75rem; /* 12px */
+  --jnt-text-sm: 0.875rem; /* 14px */
+  --jnt-text-base: 1rem; /* 16px */
+  --jnt-text-lg: 1.125rem; /* 18px */
+  --jnt-text-xl: 1.25rem; /* 20px */
+  --jnt-text-2xl: 1.5rem; /* 24px */
+  --jnt-text-3xl: 1.875rem; /* 30px */
+
+  /* Font Weights */
+  --jnt-font-normal: 400;
+  --jnt-font-medium: 500;
+  --jnt-font-semibold: 600;
+  --jnt-font-bold: 700;
+
+  /* ========================================
+     Spacing Tokens
+     ======================================== */
+
+  --jnt-space-1: 0.25rem; /* 4px */
+  --jnt-space-2: 0.5rem; /* 8px */
+  --jnt-space-3: 0.75rem; /* 12px */
+  --jnt-space-4: 1rem; /* 16px */
+  --jnt-space-5: 1.25rem; /* 20px */
+  --jnt-space-6: 1.5rem; /* 24px */
+  --jnt-space-8: 2rem; /* 32px */
+  --jnt-space-10: 2.5rem; /* 40px */
+  --jnt-space-12: 3rem; /* 48px */
+
+  /* ========================================
+     Border Radius Tokens
+     ======================================== */
+
+  --jnt-radius-sm: 0.25rem; /* 4px */
+  --jnt-radius-md: 0.5rem; /* 8px */
+  --jnt-radius-lg: 0.75rem; /* 12px */
+  --jnt-radius-xl: 1rem; /* 16px */
+  --jnt-radius-full: 9999px; /* Full radius */
+
+  /* ========================================
+     Shadow Tokens
+     ======================================== */
+
+  --jnt-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --jnt-shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --jnt-shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --jnt-shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* ========================================
+     Animation Tokens
+     ======================================== */
+
+  /* Duration */
+  --jnt-duration-fast: 150ms;
+  --jnt-duration-normal: 200ms;
+  --jnt-duration-slow: 300ms;
+
+  /* Easing */
+  --jnt-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --jnt-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --jnt-ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* ========================================
+   Light Theme - Ocean Depths
+   ======================================== */
+
+[data-theme="light"] {
+  /* Background Colors */
+  --jnt-bg-primary: #ffffff; /* white - lightest background */
+  --jnt-bg-secondary: #f8fafc; /* slate-50 - secondary background */
+  --jnt-bg-tertiary: #f1f5f9; /* slate-100 - card/block background */
+  --jnt-bg-elevated: #e2e8f0; /* slate-200 - hover/active background */
+
+  /* Text Colors */
+  --jnt-text-primary: #0f172a; /* slate-900 - primary text */
+  --jnt-text-secondary: #334155; /* slate-700 - secondary text */
+  --jnt-text-tertiary: #64748b; /* slate-500 - tertiary text */
+  --jnt-text-placeholder: #94a3b8; /* slate-400 - placeholder text */
+
+  /* Brand Colors - Ocean Depths */
+  --jnt-brand-50: #81d4fa; /* Lightest blue */
+  --jnt-brand-100: #29b6f6; /* Light blue */
+  --jnt-brand-200: #42a5f5; /* Medium blue */
+  --jnt-brand-300: #1976d2; /* Dark blue */
+  --jnt-brand-400: #1565c0; /* Darkest blue */
+  --jnt-brand-primary: #1976d2; /* Primary brand color */
+  --jnt-brand-hover: #42a5f5; /* Brand hover color */
+  --jnt-brand-active: #1565c0; /* Brand active color */
+
+  /* Semantic Colors */
+  --jnt-color-success: #16a34a; /* green-600 */
+  --jnt-color-warning: #ca8a04; /* yellow-600 */
+  --jnt-color-error: #dc2626; /* red-600 */
+  --jnt-color-info: #2563eb; /* blue-600 */
+
+  /* Shadow - More visible in light theme */
+  --jnt-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --jnt-shadow-md:
+    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --jnt-shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --jnt-shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
