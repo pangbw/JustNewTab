@@ -54,7 +54,7 @@
 >
   {#each items as item (item.id)}
     {#if item.separator}
-      <div class="border-t border-slate-700 my-1"></div>
+      <div class="border-t border-jnt-bg-elevated my-1"></div>
     {:else}
       <button
         class="context-menu-item w-full text-left {item.disabled ? 'opacity-50 cursor-not-allowed' : ''}"

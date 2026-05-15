@@ -83,64 +83,64 @@
   role="dialog"
   aria-label="快速编辑书签"
 >
-  <h4 class="text-sm font-medium text-white mb-3">编辑书签</h4>
+  <h4 class="text-jnt-sm font-jnt-medium text-jnt-text-primary mb-jnt-3">编辑书签</h4>
 
-  <div class="space-y-3">
+  <div class="space-y-jnt-3">
     <div>
-      <label class="text-xs text-slate-400 mb-1 block" for="edit-title">显示标题</label>
+      <label class="text-jnt-xs text-jnt-text-tertiary mb-1 block" for="edit-title">显示标题</label>
       <input
         id="edit-title"
         type="text"
         bind:value={title}
-        class="w-full bg-slate-700/50 text-white text-sm rounded-lg px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
+        class="w-full bg-jnt-bg-elevated/50 text-jnt-text-primary text-jnt-sm rounded-jnt-lg px-jnt-3 py-jnt-2 outline-none focus:ring-1 focus:ring-jnt-brand-primary"
         placeholder="显示标题"
       />
       {#if errors.title}
-        <p class="text-red-400 text-xs mt-1">{errors.title}</p>
+        <p class="text-jnt-error text-jnt-xs mt-1">{errors.title}</p>
       {/if}
     </div>
 
     <div>
-      <label class="text-xs text-slate-400 mb-1 block" for="edit-url">URL</label>
+      <label class="text-jnt-xs text-jnt-text-tertiary mb-1 block" for="edit-url">URL</label>
       <input
         id="edit-url"
         type="text"
         bind:value={url}
-        class="w-full bg-slate-700/50 text-white text-sm rounded-lg px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
+        class="w-full bg-jnt-bg-elevated/50 text-jnt-text-primary text-jnt-sm rounded-jnt-lg px-jnt-3 py-jnt-2 outline-none focus:ring-1 focus:ring-jnt-brand-primary"
         placeholder="https://example.com"
       />
       {#if errors.url}
-        <p class="text-red-400 text-xs mt-1">{errors.url}</p>
+        <p class="text-jnt-error text-jnt-xs mt-1">{errors.url}</p>
       {/if}
     </div>
 
     <div>
-      <label class="text-xs text-slate-400 mb-1 block" for="edit-desc">
-        描述 <span class="text-slate-500">({description.length}/500)</span>
+      <label class="text-jnt-xs text-jnt-text-tertiary mb-1 block" for="edit-desc">
+        描述 <span class="text-jnt-text-placeholder">({description.length}/500)</span>
       </label>
       <textarea
         id="edit-desc"
         bind:value={description}
-        class="w-full bg-slate-700/50 text-white text-sm rounded-lg px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+        class="w-full bg-jnt-bg-elevated/50 text-jnt-text-primary text-jnt-sm rounded-jnt-lg px-jnt-3 py-jnt-2 outline-none focus:ring-1 focus:ring-jnt-brand-primary resize-none"
         rows="3"
         placeholder="添加描述..."
         maxlength="500"
       ></textarea>
       {#if errors.description}
-        <p class="text-red-400 text-xs mt-1">{errors.description}</p>
+        <p class="text-jnt-error text-jnt-xs mt-1">{errors.description}</p>
       {/if}
     </div>
   </div>
 
-  <div class="flex justify-end gap-2 mt-4">
+  <div class="flex justify-end gap-jnt-2 mt-jnt-4">
     <button
-      class="text-xs text-slate-400 hover:text-slate-300 px-3 py-1.5"
+      class="text-jnt-xs text-jnt-text-tertiary hover:text-jnt-text-secondary px-jnt-3 py-1.5"
       onclick={onClose}
     >
       取消
     </button>
     <button
-      class="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg"
+      class="text-jnt-xs bg-jnt-brand-primary hover:bg-jnt-brand-hover text-white px-jnt-3 py-1.5 rounded-jnt-lg"
       onclick={handleSave}
     >
       保存

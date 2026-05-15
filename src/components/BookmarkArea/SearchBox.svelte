@@ -141,7 +141,7 @@
 </script>
 
 <div class="search-box relative">
-  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg class="w-4 h-4 text-jnt-text-placeholder" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
   </svg>
 
@@ -157,7 +157,7 @@
 
   {#if query}
     <button
-      class="text-slate-500 hover:text-slate-300 transition-colors"
+      class="text-jnt-text-placeholder hover:text-jnt-text-secondary transition-colors"
       onclick={handleClear}
       aria-label="清除搜索"
     >
@@ -168,21 +168,21 @@
   {/if}
 
   {#if isSearching}
-    <div class="w-4 h-4 border-2 border-slate-500 border-t-transparent rounded-full animate-spin"></div>
+    <div class="w-4 h-4 border-2 border-jnt-text-placeholder border-t-transparent rounded-full animate-spin"></div>
   {/if}
 
   {#if hasDropdownContent}
-    <div class="absolute top-full left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded-lg shadow-xl z-50 max-h-64 overflow-y-auto">
+    <div class="search-dropdown">
       {#if suggestions.length > 0}
-        <div class="px-2 py-1">
-          <span class="text-xs text-slate-500">建议</span>
+        <div class="px-jnt-2 py-1">
+          <span class="text-jnt-xs text-jnt-text-placeholder">建议</span>
         </div>
         {#each suggestions as suggestion (suggestion.id)}
           <button
-            class="w-full text-left px-3 py-2 text-sm text-slate-300 hover:bg-slate-700/50 flex items-center gap-2"
+            class="search-dropdown-item"
             onclick={() => selectSuggestion(suggestion)}
           >
-            <svg class="w-3.5 h-3.5 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-3.5 h-3.5 text-jnt-text-placeholder shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
             </svg>
             <span class="truncate">{suggestion.title ?? suggestion.url}</span>
@@ -191,17 +191,17 @@
       {/if}
 
       {#if isFetchingSuggestions && suggestions.length === 0}
-        <div class="px-3 py-2 text-xs text-slate-500 flex items-center gap-2">
-          <div class="w-3 h-3 border-2 border-slate-500 border-t-transparent rounded-full animate-spin"></div>
+        <div class="px-jnt-3 py-jnt-2 text-jnt-xs text-jnt-text-placeholder flex items-center gap-jnt-2">
+          <div class="w-3 h-3 border-2 border-jnt-text-placeholder border-t-transparent rounded-full animate-spin"></div>
           搜索中...
         </div>
       {/if}
 
       {#if history.length > 0 && (!query.trim() || suggestions.length === 0)}
-        <div class="px-2 py-1 flex items-center justify-between">
-          <span class="text-xs text-slate-500">搜索历史</span>
+        <div class="px-jnt-2 py-1 flex items-center justify-between">
+          <span class="text-jnt-xs text-jnt-text-placeholder">搜索历史</span>
           <button
-            class="text-xs text-slate-600 hover:text-slate-400"
+            class="text-jnt-xs text-jnt-text-placeholder hover:text-jnt-text-tertiary"
             onclick={() => { clearHistory(); }}
           >
             清除
@@ -210,16 +210,16 @@
         {#each history as item (item)}
           <div class="flex items-center group/item">
             <button
-              class="flex-1 text-left px-3 py-2 text-sm text-slate-300 hover:bg-slate-700/50 flex items-center gap-2"
+              class="flex-1 text-left px-jnt-3 py-jnt-2 text-jnt-sm text-jnt-text-secondary hover:bg-jnt-bg-elevated/50 flex items-center gap-jnt-2"
               onclick={() => selectHistoryItem(item)}
             >
-              <svg class="w-3.5 h-3.5 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-3.5 h-3.5 text-jnt-text-placeholder shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span class="truncate">{item}</span>
             </button>
             <button
-              class="px-2 py-2 text-slate-600 hover:text-slate-400 opacity-0 group-hover/item:opacity-100 transition-opacity"
+              class="px-jnt-2 py-jnt-2 text-jnt-text-placeholder hover:text-jnt-text-tertiary opacity-0 group-hover/item:opacity-100 transition-opacity"
               onclick={() => { removeFromHistory(item); }}
               aria-label="删除历史记录"
             >

@@ -65,16 +65,16 @@
   {#if bookmark.favicon}
     <img src={bookmark.favicon} alt="" class="w-4 h-4 rounded-sm" loading="lazy" />
   {:else}
-    <div class="w-4 h-4 rounded-sm bg-slate-600 flex items-center justify-center text-[10px] text-slate-400">
+    <div class="w-4 h-4 rounded-sm bg-jnt-bg-elevated flex items-center justify-center text-[10px] text-jnt-text-tertiary">
       {displayTitle.charAt(0).toUpperCase()}
     </div>
   {/if}
 
-  <span class="text-sm text-slate-300 truncate flex-1">{displayTitle}</span>
+  <span class="text-jnt-sm text-jnt-text-secondary truncate flex-1">{displayTitle}</span>
 
   {#if isOpen}
     <button
-      class="close-btn opacity-0 group-hover:opacity-100 text-slate-500 hover:text-red-400 transition-opacity p-0.5"
+      class="close-btn opacity-0 group-hover:opacity-100 text-jnt-text-tertiary hover:text-jnt-error transition-opacity p-0.5"
       onclick={handleCloseTab}
       aria-label="关闭标签页"
     >

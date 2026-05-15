@@ -4,11 +4,11 @@
 }
 
 .bookmark-block {
-  @apply bg-slate-800/50 rounded-xl p-4 transition-all duration-200;
+  @apply bg-jnt-bg-tertiary rounded-jnt-xl p-jnt-4 shadow-jnt-md transition-all duration-jnt-normal ease-jnt-standard;
 }
 
 .bookmark-block:hover {
-  @apply bg-slate-800/70;
+  @apply bg-jnt-bg-elevated shadow-jnt-lg;
 }
 
 .bookmark-block.dragging {
@@ -16,70 +16,70 @@
 }
 
 .bookmark-block.drag-over {
-  @apply ring-2 ring-blue-500/50;
+  @apply ring-2 ring-jnt-brand-primary/50;
 }
 
 .bookmark-item {
-  @apply flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors duration-150;
+  @apply flex items-center gap-jnt-2 px-jnt-3 py-jnt-2 rounded-jnt-md cursor-pointer transition-colors duration-jnt-fast;
 }
 
 .bookmark-item:hover {
-  @apply bg-slate-700/50;
+  @apply bg-jnt-bg-elevated/50;
 }
 
 .bookmark-item.is-open {
-  @apply bg-blue-500/10 border-l-2 border-blue-500;
+  @apply bg-jnt-brand-primary/10 border-l-2 border-jnt-brand-primary;
 }
 
 .bookmark-item .close-btn {
-  @apply opacity-0 group-hover:opacity-100 transition-opacity duration-150;
+  @apply opacity-0 group-hover:opacity-100 transition-opacity duration-jnt-fast;
 }
 
 .context-menu {
-  @apply fixed z-50 min-w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-xl py-1;
+  @apply fixed z-50 min-w-48 bg-jnt-bg-tertiary border border-jnt-bg-elevated rounded-jnt-lg shadow-jnt-xl py-jnt-1;
 }
 
 .context-menu-item {
-  @apply px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 cursor-pointer;
+  @apply px-jnt-4 py-jnt-2 text-jnt-sm text-jnt-text-secondary hover:bg-jnt-bg-elevated cursor-pointer;
 }
 
 .quick-edit-card {
-  @apply fixed z-50 bg-slate-800 border border-slate-700 rounded-xl shadow-xl p-4 w-80;
+  @apply fixed z-50 bg-jnt-bg-tertiary border border-jnt-bg-elevated rounded-jnt-xl shadow-jnt-xl p-jnt-4 w-80;
 }
 
 .quick-config-card {
-  @apply fixed z-50 bg-slate-800 border border-slate-700 rounded-xl shadow-xl p-4 w-72;
+  @apply fixed z-50 bg-jnt-bg-tertiary border border-jnt-bg-elevated rounded-jnt-xl shadow-jnt-xl p-jnt-4 w-72;
 }
 
 .workspace-tab {
-  @apply px-4 py-2 text-sm rounded-t-lg cursor-pointer transition-colors duration-150;
+  @apply px-jnt-4 py-jnt-2 text-jnt-sm rounded-t-jnt-lg cursor-pointer transition-colors duration-jnt-fast;
 }
 
 .workspace-tab.active {
-  @apply bg-slate-800/50 text-white;
+  @apply bg-jnt-bg-tertiary text-jnt-text-primary;
 }
 
 .workspace-tab:not(.active) {
-  @apply text-slate-400 hover:text-slate-300;
+  @apply text-jnt-text-tertiary hover:text-jnt-text-secondary;
 }
 
 .search-box {
-  @apply flex items-center gap-2 bg-slate-800/50 rounded-lg px-3 py-2;
+  @apply flex items-center gap-jnt-2 bg-jnt-bg-tertiary rounded-jnt-lg px-jnt-3 py-jnt-2;
 }
 
 .search-box input {
-  @apply bg-transparent text-white placeholder-slate-500 outline-none flex-1;
+  @apply bg-transparent text-jnt-text-primary placeholder-jnt-text-placeholder outline-none flex-1;
 }
 
 .search-box mark,
 .bookmark-area mark {
-  @apply bg-yellow-500/30 text-yellow-200 rounded-sm px-0.5;
+  @apply bg-jnt-brand-primary/30 text-jnt-brand-50 rounded-jnt-sm px-0.5;
 }
 
 .search-dropdown {
-  @apply absolute top-full left-0 right-0 mt-1 bg-slate-800 border border-slate-700 rounded-lg shadow-xl z-50 max-h-64 overflow-y-auto;
+  @apply absolute top-full left-0 right-0 mt-jnt-1 bg-jnt-bg-tertiary border border-jnt-bg-elevated rounded-jnt-lg shadow-jnt-xl z-50 max-h-64 overflow-y-auto;
 }
 
 .search-dropdown-item {
-  @apply w-full text-left px-3 py-2 text-sm text-slate-300 hover:bg-slate-700/50 flex items-center gap-2;
+  @apply w-full text-left px-jnt-3 py-jnt-2 text-jnt-sm text-jnt-text-secondary hover:bg-jnt-bg-elevated/50 flex items-center gap-jnt-2;
 }

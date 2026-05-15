@@ -234,20 +234,20 @@
   </div>
 
   {#if searchResults !== null}
-    <div class="mb-4">
-      <h3 class="text-sm text-slate-400 mb-2">搜索结果 ({searchResults.length})</h3>
+    <div class="mb-jnt-4">
+      <h3 class="text-jnt-sm text-jnt-text-tertiary mb-jnt-2">搜索结果 ({searchResults.length})</h3>
       {#if searchResults.length === 0}
-        <p class="text-slate-500 text-sm">未找到匹配的书签</p>
+        <p class="text-jnt-text-placeholder text-jnt-sm">未找到匹配的书签</p>
       {:else}
         <div class="space-y-1">
           {#each searchResults as result (result.id)}
             {#if result.url}
               <a
                 href={result.url}
-                class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-slate-700/50 text-sm text-slate-300"
+                class="flex items-center gap-jnt-2 px-jnt-3 py-jnt-2 rounded-jnt-lg hover:bg-jnt-bg-elevated/50 text-jnt-sm text-jnt-text-secondary"
               >
                 <span class="truncate">{@html highlightMatch(result.title ?? '', searchQueryText)}</span>
-                <span class="text-slate-500 text-xs truncate">{@html highlightMatch(result.url, searchQueryText)}</span>
+                <span class="text-jnt-text-placeholder text-jnt-xs truncate">{@html highlightMatch(result.url, searchQueryText)}</span>
               </a>
             {/if}
           {/each}
@@ -255,12 +255,12 @@
       {/if}
     </div>
   {:else if $bookmarkBlocks.length === 0}
-    <div class="flex flex-col items-center justify-center py-20 text-slate-500">
-      <svg class="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="flex flex-col items-center justify-center py-20 text-jnt-text-placeholder">
+      <svg class="w-16 h-16 mb-jnt-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
       </svg>
-      <p class="text-lg mb-1">右键呼出菜单创建书签</p>
-      <p class="text-sm">在此区域右键点击创建书签块或书签</p>
+      <p class="text-jnt-lg mb-1">右键呼出菜单创建书签</p>
+      <p class="text-jnt-sm">在此区域右键点击创建书签块或书签</p>
     </div>
   {:else}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

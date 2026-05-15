@@ -71,15 +71,15 @@
   ondrop={handleDrop}
   oncontextmenu={handleContextMenu}
 >
-  <div class="flex items-center justify-between mb-3">
-    <div class="flex items-center gap-2 flex-1 min-w-0">
+  <div class="flex items-center justify-between mb-jnt-3">
+    <div class="flex items-center gap-jnt-2 flex-1 min-w-0">
       <button
-        class="text-slate-500 hover:text-slate-300 transition-colors p-0.5"
+        class="text-jnt-text-tertiary hover:text-jnt-text-secondary transition-colors p-0.5"
         onclick={() => toggleBlockCollapse(block.id)}
         aria-label={block.isCollapsed ? '展开' : '收起'}
       >
         <svg
-          class="w-4 h-4 transition-transform duration-200 {block.isCollapsed ? '-rotate-90' : ''}"
+          class="w-4 h-4 transition-transform duration-jnt-normal {block.isCollapsed ? '-rotate-90' : ''}"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -92,14 +92,14 @@
         <input
           type="text"
           bind:value={editName}
-          class="bg-transparent text-white font-medium outline-none flex-1 min-w-0"
+          class="bg-transparent text-jnt-text-primary font-jnt-medium outline-none flex-1 min-w-0"
           onkeydown={handleKeydown}
           onblur={handleSaveEdit}
           autofocus
         />
       {:else}
         <h3
-          class="text-white font-medium truncate cursor-pointer"
+          class="text-jnt-text-primary font-jnt-medium truncate cursor-pointer"
           ondblclick={handleStartEdit}
         >
           {#if block.icon}<span class="mr-1">{block.icon}</span>{/if}{block.name}
@@ -108,7 +108,7 @@
     </div>
 
     <button
-      class="text-slate-500 hover:text-slate-300 transition-colors p-1 opacity-0 group-hover:opacity-100"
+      class="text-jnt-text-tertiary hover:text-jnt-text-secondary transition-colors p-jnt-1 opacity-0 group-hover:opacity-100"
       onclick={() => onQuickConfig?.(block)}
       aria-label="快速配置"
     >
@@ -120,7 +120,7 @@
   </div>
 
   {#if !block.isCollapsed}
-    <div class={block.layout === 'list' ? 'space-y-1' : 'grid grid-cols-2 gap-1'}>
+    <div class={block.layout === 'list' ? 'space-y-jnt-1' : 'grid grid-cols-2 gap-jnt-1'}>
       {#each block.bookmarks as bookmark (bookmark.id)}
         <BookmarkItem
           {bookmark}
@@ -131,7 +131,7 @@
       {/each}
 
       {#if block.bookmarks.length === 0}
-        <p class="text-slate-500 text-xs text-center py-2 col-span-2">拖拽书签到此处或右键添加</p>
+        <p class="text-jnt-text-placeholder text-jnt-xs text-center py-jnt-2 col-span-2">拖拽书签到此处或右键添加</p>
       {/if}
     </div>
   {/if}
