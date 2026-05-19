@@ -86,6 +86,13 @@
   --jnt-radius-full: 9999px; /* Full radius */
 
   /* ========================================
+     Border Tokens
+     ======================================== */
+
+  --jnt-border-primary: #334155; /* slate-700 - primary border */
+  --jnt-border-secondary: #475569; /* slate-600 - secondary border */
+
+  /* ========================================
      Shadow Tokens
      ======================================== */
 
@@ -117,17 +124,17 @@
    ======================================== */
 
 [data-theme="light"] {
-  /* Background Colors */
-  --jnt-bg-primary: #ffffff; /* white - lightest background */
-  --jnt-bg-secondary: #f8fafc; /* slate-50 - secondary background */
-  --jnt-bg-tertiary: #f1f5f9; /* slate-100 - card/block background */
-  --jnt-bg-elevated: #e2e8f0; /* slate-200 - hover/active background */
+  /* Background Colors - Using darkest from dark theme palette */
+  --jnt-bg-primary: #334155; /* slate-700 - deepest background from dark theme */
+  --jnt-bg-secondary: #1e293b; /* slate-900 - secondary background from dark theme */
+  --jnt-bg-tertiary: #0f172a; /* slate-950 - card/block background from dark theme */
+  --jnt-bg-elevated: #1e293b; /* slate-900 - hover/active background from dark theme */
 
-  /* Text Colors */
-  --jnt-text-primary: #0f172a; /* slate-900 - primary text */
-  --jnt-text-secondary: #334155; /* slate-700 - secondary text */
-  --jnt-text-tertiary: #64748b; /* slate-500 - tertiary text */
-  --jnt-text-placeholder: #94a3b8; /* slate-400 - placeholder text */
+  /* Text Colors - Light colors for contrast */
+  --jnt-text-primary: #ffffff; /* white - primary text */
+  --jnt-text-secondary: #e2e8f0; /* slate-200 - secondary text */
+  --jnt-text-tertiary: #94a3b8; /* slate-400 - tertiary text */
+  --jnt-text-placeholder: #64748b; /* slate-500 - placeholder text */
 
   /* Brand Colors - Ocean Depths */
   --jnt-brand-50: #81d4fa; /* Lightest blue */
@@ -144,6 +151,10 @@
   --jnt-color-warning: #ca8a04; /* yellow-600 */
   --jnt-color-error: #dc2626; /* red-600 */
   --jnt-color-info: #2563eb; /* blue-600 */
+
+  /* Border Colors - Using deepest from dark theme palette */
+  --jnt-border-primary: #0f172a; /* slate-950 - primary border from dark theme */
+  --jnt-border-secondary: #1e293b; /* slate-900 - secondary border from dark theme */
 
   /* Shadow - More visible in light theme */
   --jnt-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);

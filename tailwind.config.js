@@ -24,6 +24,8 @@ export default {
         "jnt-warning": "var(--jnt-color-warning)",
         "jnt-error": "var(--jnt-color-error)",
         "jnt-info": "var(--jnt-color-info)",
+        "jnt-border-primary": "var(--jnt-border-primary)",
+        "jnt-border-secondary": "var(--jnt-border-secondary)",
       },
       fontFamily: {
         "jnt-sans": "var(--jnt-font-sans)",

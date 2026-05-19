@@ -5,7 +5,7 @@
    * 任务 2.2: 测试 Tailwind 集成
    */
 
-  let showDetails = false
+  let showDetails = $state(false)
 
   const toggleDetails = () => {
     showDetails = !showDetails
@@ -20,7 +20,7 @@
     <button
       class="bg-jnt-brand-primary text-white px-jnt-4 py-jnt-2 rounded-jnt-md
              hover:bg-jnt-brand-hover transition-colors duration-jnt-normal"
-      on:click={toggleDetails}
+      onclick={toggleDetails}
     >
       {showDetails ? '隐藏详情' : '显示详情'}
     </button>
