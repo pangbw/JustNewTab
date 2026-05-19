@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { tick } from 'svelte';
+
   interface MenuItem {
     id: string;
     label: string;
@@ -18,6 +20,45 @@
   const { items, x, y, onSelect, onClose }: Props = $props();
 
   let menuEl = $state<HTMLElement | null>(null);
+  let adjustedX = $state(0);
+  let adjustedY = $state(0);
+
+  // Adjust position when component mounts or x/y changes
+  $effect(() => {
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      if (menuEl) {
+        const rect = menuEl.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        // Calculate adjusted position
+        let newX = x;
+        let newY = y;
+
+        // Adjust X position - prevent overflow right
+        if (x + rect.width > viewportWidth) {
+          newX = x - rect.width;
+        }
+        // Adjust X position - prevent overflow left
+        if (newX < 0) {
+          newX = 0;
+        }
+
+        // Adjust Y position - prevent overflow bottom
+        if (y + rect.height > viewportHeight) {
+          newY = y - rect.height;
+        }
+        // Adjust Y position - prevent overflow top
+        if (newY < 0) {
+          newY = 0;
+        }
+
+        adjustedX = newX;
+        adjustedY = newY;
+      }
+    });
+  });
 
   function handleClickOutside(e: MouseEvent): void {
     if (menuEl && !menuEl.contains(e.target as Node)) {
@@ -48,16 +89,16 @@
 
 <div
   bind:this={menuEl}
-  class="context-menu"
-  style="left: {x}px; top: {y}px;"
+  class="context-menu bg-jnt-bg-tertiary/80 backdrop-blur-xl border border-jnt-border-primary rounded-jnt-lg shadow-jnt-xl p-jnt-1 min-w-[140px] animate-in fade-in duration-jnt-fast"
+  style="position: fixed; left: {adjustedX}px; top: {adjustedY}px; z-index: 99999;"
   role="menu"
 >
   {#each items as item (item.id)}
     {#if item.separator}
-      <div class="border-t border-jnt-bg-elevated my-1"></div>
+      <div class="border-t border-jnt-bg-elevated my-jnt-1"></div>
     {:else}
       <button
-        class="context-menu-item w-full text-left {item.disabled ? 'opacity-50 cursor-not-allowed' : ''}"
+        class="context-menu-item w-full text-left px-jnt-3 py-jnt-1 text-jnt-text-xs text-jnt-text-secondary hover:bg-jnt-bg-elevated rounded-jnt-md transition-colors duration-jnt-fast {item.disabled ? 'opacity-50 cursor-not-allowed' : ''}"
         role="menuitem"
         disabled={item.disabled}
         onclick={() => handleSelect(item.id, item.disabled)}

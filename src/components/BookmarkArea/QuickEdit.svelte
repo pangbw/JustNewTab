@@ -85,69 +85,69 @@
 </script>
 
 <div
-  class="quick-edit-card"
-  style="left: {x}px; top: {y}px;"
+  class="quick-edit-card fixed bg-jnt-bg-tertiary/80 backdrop-blur-xl border border-jnt-border-primary rounded-jnt-xl shadow-jnt-xl p-jnt-4 w-80 z-50 animate-in fade-in zoom-in-95 duration-jnt-normal"
+  style="left: 50%; top: 50%; transform: translate(-50%, -50%);"
   role="dialog"
   aria-label="快速编辑书签"
 >
-  <h4 class="text-jnt-sm font-jnt-medium text-jnt-text-primary mb-jnt-3">编辑书签</h4>
+  <h4 class="text-jnt-text-sm font-jnt-medium text-jnt-text-primary mb-jnt-3">编辑书签</h4>
 
   <div class="space-y-jnt-3">
     <div>
-      <label class="text-jnt-xs text-jnt-text-tertiary mb-1 block" for="edit-title">显示标题</label>
+      <label class="text-jnt-text-xs text-jnt-text-tertiary mb-jnt-1 block" for="edit-title">显示标题</label>
       <input
         id="edit-title"
         type="text"
         bind:value={title}
-        class="w-full bg-jnt-bg-elevated/50 text-jnt-text-primary text-jnt-sm rounded-jnt-lg px-jnt-3 py-jnt-2 outline-none focus:ring-1 focus:ring-jnt-brand-primary"
+        class="w-full bg-jnt-bg-elevated text-jnt-text-primary text-jnt-text-sm rounded-jnt-md px-jnt-3 py-jnt-3 outline-none focus:ring-1 focus:ring-jnt-brand-primary border border-jnt-bg-elevated"
         placeholder="显示标题"
       />
       {#if errors.title}
-        <p class="text-jnt-error text-jnt-xs mt-1">{errors.title}</p>
+        <p class="text-jnt-color-error text-jnt-text-xs mt-jnt-1">{errors.title}</p>
       {/if}
     </div>
 
     <div>
-      <label class="text-jnt-xs text-jnt-text-tertiary mb-1 block" for="edit-url">URL</label>
+      <label class="text-jnt-text-xs text-jnt-text-tertiary mb-jnt-1 block" for="edit-url">URL</label>
       <input
         id="edit-url"
         type="text"
         bind:value={url}
-        class="w-full bg-jnt-bg-elevated/50 text-jnt-text-primary text-jnt-sm rounded-jnt-lg px-jnt-3 py-jnt-2 outline-none focus:ring-1 focus:ring-jnt-brand-primary"
+        class="w-full bg-jnt-bg-elevated text-jnt-text-primary text-jnt-text-sm rounded-jnt-md px-jnt-3 py-jnt-3 outline-none focus:ring-1 focus:ring-jnt-brand-primary border border-jnt-bg-elevated"
         placeholder="https://example.com"
       />
       {#if errors.url}
-        <p class="text-jnt-error text-jnt-xs mt-1">{errors.url}</p>
+        <p class="text-jnt-color-error text-jnt-text-xs mt-jnt-1">{errors.url}</p>
       {/if}
     </div>
 
     <div>
-      <label class="text-jnt-xs text-jnt-text-tertiary mb-1 block" for="edit-desc">
+      <label class="text-jnt-text-xs text-jnt-text-tertiary mb-jnt-1 block" for="edit-desc">
         描述 <span class="text-jnt-text-placeholder">({description.length}/500)</span>
       </label>
       <textarea
         id="edit-desc"
         bind:value={description}
-        class="w-full bg-jnt-bg-elevated/50 text-jnt-text-primary text-jnt-sm rounded-jnt-lg px-jnt-3 py-jnt-2 outline-none focus:ring-1 focus:ring-jnt-brand-primary resize-none"
+        class="w-full bg-jnt-bg-elevated text-jnt-text-primary text-jnt-text-sm rounded-jnt-md px-jnt-3 py-jnt-3 outline-none focus:ring-1 focus:ring-jnt-brand-primary resize-none border border-jnt-bg-elevated"
         rows="3"
         placeholder="添加描述..."
         maxlength="500"
       ></textarea>
       {#if errors.description}
-        <p class="text-jnt-error text-jnt-xs mt-1">{errors.description}</p>
+        <p class="text-jnt-color-error text-jnt-text-xs mt-jnt-1">{errors.description}</p>
       {/if}
     </div>
   </div>
 
   <div class="flex justify-end gap-jnt-2 mt-jnt-4">
     <button
-      class="text-jnt-xs text-jnt-text-tertiary hover:text-jnt-text-secondary px-jnt-3 py-1.5"
+      class="text-jnt-text-xs text-jnt-text-tertiary hover:text-jnt-text-secondary px-jnt-3 py-jnt-2 rounded-jnt-md transition-colors duration-jnt-fast"
       onclick={onClose}
     >
       取消
     </button>
     <button
-      class="text-jnt-xs bg-jnt-brand-primary hover:bg-jnt-brand-hover text-white px-jnt-3 py-1.5 rounded-jnt-lg"
+      class="text-jnt-text-xs bg-jnt-brand-primary hover:bg-jnt-brand-hover text-white px-jnt-3 py-jnt-2 rounded-jnt-md transition-colors duration-jnt-fast"
       onclick={handleSave}
     >
       保存

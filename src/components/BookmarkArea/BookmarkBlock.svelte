@@ -10,9 +10,10 @@
     onBookmarkContextMenu?: (e: MouseEvent, bookmark: Bookmark, blockId: string) => void;
     onQuickEdit?: (bookmark: Bookmark, blockId: string) => void;
     onQuickConfig?: (block: BookmarkBlock) => void;
+    onReorder?: (sourceId: string, targetId: string) => void;
   }
 
-  const { block, onContextMenu, onBookmarkContextMenu, onQuickEdit, onQuickConfig }: Props = $props();
+  const { block, onContextMenu, onBookmarkContextMenu, onQuickEdit, onQuickConfig, onReorder }: Props = $props();
 
   let isEditing = $state(false);
   let editName = $state('');
@@ -57,14 +58,14 @@
     e.preventDefault();
     const result = endDrag();
     if (result && result.sourceId !== result.targetId) {
-      // Reorder logic handled by parent
+      onReorder?.(result.sourceId, result.targetId);
     }
   }
 </script>
 
 <div
-  class="bookmark-block relative"
-  style="border-left: 3px solid {block.color}"
+  class="bookmark-block relative bg-jnt-bg-tertiary/60 backdrop-blur-xl rounded-jnt-xl p-jnt-4 shadow-jnt-md border border-jnt-border-primary border-l-[3px] hover:bg-jnt-bg-elevated/80 hover:shadow-jnt-lg transition-all duration-jnt-normal ease-jnt-ease-standard group"
+  style="border-left-color: {block.color}"
   draggable="true"
   role="region"
   aria-label={block.name}
@@ -76,12 +77,12 @@
   <div class="flex items-center justify-between mb-jnt-3">
     <div class="flex items-center gap-jnt-2 flex-1 min-w-0">
       <button
-        class="text-jnt-text-tertiary hover:text-jnt-text-secondary transition-colors p-0.5"
+        class="text-jnt-text-tertiary hover:text-jnt-text-secondary transition-colors duration-jnt-fast p-jnt-1"
         onclick={() => toggleBlockCollapse(block.id)}
         aria-label={block.isCollapsed ? '展开' : '收起'}
       >
         <svg
-          class="w-4 h-4 transition-transform duration-jnt-normal {block.isCollapsed ? '-rotate-90' : ''}"
+          class="w-4 h-4 transition-transform duration-jnt-normal ease-jnt-ease-standard {block.isCollapsed ? '-rotate-90' : ''}"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -94,23 +95,23 @@
         <input
           type="text"
           bind:value={editName}
-          class="bg-transparent text-jnt-text-primary font-jnt-medium outline-none flex-1 min-w-0"
+          class="bg-jnt-bg-elevated text-jnt-text-primary font-jnt-semibold text-jnt-text-lg outline-none flex-1 min-w-0 px-jnt-2 py-jnt-1 rounded-jnt-md border-2 border-jnt-brand-primary shadow-jnt-md"
           onkeydown={handleKeydown}
           onblur={handleSaveEdit}
         />
       {:else}
         <h3
-          class="text-jnt-text-primary font-jnt-medium truncate cursor-pointer"
+          class="text-jnt-text-primary font-jnt-semibold text-jnt-text-lg truncate cursor-pointer"
           ondblclick={handleStartEdit}
         >
-          {#if block.icon}<span class="mr-1">{block.icon}</span>{/if}{block.name}
+          {#if block.icon}<span class="mr-jnt-1">{block.icon}</span>{/if}{block.name}
         </h3>
       {/if}
     </div>
 
     <button
-      class="text-jnt-text-tertiary hover:text-jnt-text-secondary transition-colors p-jnt-1 opacity-0 group-hover:opacity-100"
-      onclick={() => onQuickConfig?.(block)}
+      class="text-jnt-text-tertiary hover:text-jnt-text-secondary transition-colors duration-jnt-fast p-jnt-1 opacity-0 group-hover:opacity-100"
+      onclick={(e) => { e.stopPropagation(); onQuickConfig?.(block); }}
       aria-label="快速配置"
     >
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,7 +133,7 @@
       {/each}
 
       {#if block.bookmarks.length === 0}
-        <p class="text-jnt-text-placeholder text-jnt-xs text-center py-jnt-2 col-span-2">拖拽书签到此处或右键添加</p>
+        <p class="text-jnt-text-placeholder text-jnt-text-xs text-center py-jnt-2 col-span-2">拖拽书签到此处或右键添加</p>
       {/if}
     </div>
   {/if}
